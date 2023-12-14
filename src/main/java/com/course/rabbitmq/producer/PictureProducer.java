@@ -4,12 +4,12 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.course.rabbitmq.producer.entity.Employee;
+import com.course.rabbitmq.producer.entity.Picture;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-public class HumanResourceProducer {
+public class PictureProducer {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -17,10 +17,10 @@ public class HumanResourceProducer {
     @Autowired
     private ObjectMapper objectMapper;
 
-    public void sendMessage(Employee emp) throws JsonProcessingException {
-        var json = objectMapper.writeValueAsString(emp);
+    public void sendMessage(Picture p) throws JsonProcessingException {
+        var json = objectMapper.writeValueAsString(p);
 
-        rabbitTemplate.convertAndSend("x.hr", "", json);
+        rabbitTemplate.convertAndSend("x.picture", p.getType(), json);
     }
 
 }

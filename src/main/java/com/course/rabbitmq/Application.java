@@ -1,13 +1,13 @@
 package com.course.rabbitmq;
 
-import com.course.rabbitmq.producer.HumanResourceProducer;
-import com.course.rabbitmq.producer.entity.Employee;
+import com.course.rabbitmq.producer.PictureProducer;
+import com.course.rabbitmq.producer.entity.Picture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.time.LocalDate;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 
@@ -15,7 +15,11 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Application implements CommandLineRunner {
 
     @Autowired
-    private HumanResourceProducer humanResourceProducer;
+    private PictureProducer pictureProducer;
+
+    private final List<String> SOURCES = List.of("mobile", "web");
+
+    private final List<String> TYPES = List.of("jpg", "png", "svg");
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -23,9 +27,13 @@ public class Application implements CommandLineRunner {
 
    @Override
    public void run (String... args) throws Exception{
-        for (int i=0;i<5;i++){
-             var emp = new Employee("emp-" + i ,  "Employee "+ i, LocalDate.now());
-             humanResourceProducer.sendMessage(emp);
+        for (int i=0;i<10;i++){
+             var p  = new Picture();
+             p.setName("Picture " + i);
+             p.setSize(ThreadLocalRandom.current().nextLong(1,10000));
+             p.setSource(SOURCES.get(i % SOURCES.size()));
+             p.setType(TYPES.get( i % TYPES.size()));
+             pictureProducer.sendMessage(p);
         }
    }
 
