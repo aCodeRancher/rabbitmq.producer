@@ -1,5 +1,6 @@
 package com.course.rabbitmq;
 
+import com.course.rabbitmq.producer.PictureProducerTwo;
 import com.course.rabbitmq.producer.entity.Picture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,7 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Application implements CommandLineRunner {
 
     @Autowired
-    private PictureProducer pictureProducer;
+    private PictureProducerTwo pictureProducer;
 
     private final List<String> SOURCES = List.of("mobile", "web");
 
