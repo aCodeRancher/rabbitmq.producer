@@ -1,6 +1,5 @@
 package com.course.rabbitmq;
 
-import com.course.rabbitmq.producer.PictureProducer;
 import com.course.rabbitmq.producer.entity.Picture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
