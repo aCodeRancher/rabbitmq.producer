@@ -9,7 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-public class PictureProducer {
+public class MyPictureProducer {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -20,7 +20,6 @@ public class PictureProducer {
     public void sendMessage(Picture p) throws JsonProcessingException {
         var json = objectMapper.writeValueAsString(p);
 
-        rabbitTemplate.convertAndSend("x.picture", p.getType(), json);
+        rabbitTemplate.convertAndSend("x.mypicture", p.getType(), json);
     }
-
 }
