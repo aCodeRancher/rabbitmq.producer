@@ -1,7 +1,6 @@
 package com.course.rabbitmq;
 
 import com.course.rabbitmq.producer.PictureProducerTwo;
-import com.course.rabbitmq.producer.entity.Picture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,14 +26,7 @@ public class Application implements CommandLineRunner {
 
    @Override
    public void run (String... args) throws Exception{
-        for (int i=0;i<10;i++){
-             var p  = new Picture();
-             p.setName("Picture " + i);
-             p.setSize(ThreadLocalRandom.current().nextLong(1,10000));
-             p.setSource(SOURCES.get(i % SOURCES.size()));
-             p.setType(TYPES.get( i % TYPES.size()));
-             pictureProducer.sendMessage(p);
-        }
+        
    }
 
 }
