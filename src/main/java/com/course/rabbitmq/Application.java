@@ -1,7 +1,7 @@
 package com.course.rabbitmq;
 
-import com.course.rabbitmq.producer.EmployeeJsonProducer;
-import com.course.rabbitmq.producer.entity.Employee;
+import com.course.rabbitmq.producer.ReportRequestProducer;
+import com.course.rabbitmq.producer.entity.ReportRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Application implements CommandLineRunner {
 
     @Autowired
-    private EmployeeJsonProducer employeeJsonProducer;
+    private ReportRequestProducer producer;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -22,10 +22,13 @@ public class Application implements CommandLineRunner {
 
    @Override
    public void run (String... args) throws Exception{
-        for (int i=0;i<5;i++){
-             var emp = new Employee("emp-" + i ,  "Employee "+ i, LocalDate.now());
-             employeeJsonProducer.sendMessage(emp);
-        }
+         for (int i=0; i<4;i++){
+             var reportRequest = new ReportRequest();
+             reportRequest.setReportName("Report "+i);
+             reportRequest.setLarge(i % 2 == 0 ? true: false);
+
+             producer.sendMessage(reportRequest);
+         }
    }
 
 }
