@@ -4,8 +4,9 @@ logging:
 
 spring:
   rabbitmq:
-    addresses: "localhost:5672"
-    username: guest
-    password: guest
+    host: porpoise.rmq.cloudamqp.com
+    username: myfgoyvw
+    virtual-host: myfgoyvw
+    password: QCh4T6au141-Mx_VXI04f_L6zPCLtp8i
   main:
     banner-mode: OFF
