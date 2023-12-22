@@ -1,6 +1,6 @@
 package com.course.rabbitmq;
 
-import com.course.rabbitmq.producer.RetryPictureProducer;
+import com.course.rabbitmq.producer.SpringPictureProducer;
 import com.course.rabbitmq.producer.entity.Picture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -8,14 +8,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+
 
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
     @Autowired
-    private RetryPictureProducer pictureProducer;
+    private SpringPictureProducer producer;
 
     private final List<String> SOURCES = List.of("mobile", "web");
 
@@ -27,14 +27,12 @@ public class Application implements CommandLineRunner {
 
    @Override
    public void run (String... args) throws Exception{
-        for (int i=0;i<10;i++){
-             var p  = new Picture();
-             p.setName("Picture " + i);
-             p.setSize(ThreadLocalRandom.current().nextLong(9001,10000));
-             p.setSource(SOURCES.get(i % SOURCES.size()));
-             p.setType(TYPES.get( i % TYPES.size()));
-             pictureProducer.sendMessage(p);
+            var p = new Picture();
+             p.setName("Spring picture");
+             p.setSize(9500);
+             p.setSource("web");
+             p.setType("jpg");
+             producer.sendMessage(p);
         }
-   }
-
 }
+

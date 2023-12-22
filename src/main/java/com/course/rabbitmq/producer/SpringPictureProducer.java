@@ -8,7 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-public class RetryPictureProducer {
+public class SpringPictureProducer {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -19,7 +19,6 @@ public class RetryPictureProducer {
     public void sendMessage(Picture p) throws JsonProcessingException {
         var json = objectMapper.writeValueAsString(p);
 
-        rabbitTemplate.convertAndSend("x.guideline.work", p.getType(), json);
+        rabbitTemplate.convertAndSend("x.spring.work", p.getType(), json);
     }
-
 }
