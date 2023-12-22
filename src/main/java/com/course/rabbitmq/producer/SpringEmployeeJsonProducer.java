@@ -8,7 +8,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-public class RetryEmployeeJsonProducer {
+public class SpringEmployeeJsonProducer {
+
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
@@ -18,6 +19,6 @@ public class RetryEmployeeJsonProducer {
     public void sendMessage(Employee emp) throws JsonProcessingException {
         var json = objectMapper.writeValueAsString(emp);
 
-        rabbitTemplate.convertAndSend("x.guideline2.work", "", json);
+        rabbitTemplate.convertAndSend("x.spring2.work", "", json);
     }
 }
